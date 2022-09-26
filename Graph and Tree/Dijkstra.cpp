@@ -18,4 +18,4 @@ void dijkstra(int source)
             {
                 if(s.count({dist[c.f],c.f}))s.erase({dist[c.f],c.f});
                 dist[c.f]=dist[vert]+c.s;s.insert({dist[c.f],c.f});
-            }}}}
+    }}}}

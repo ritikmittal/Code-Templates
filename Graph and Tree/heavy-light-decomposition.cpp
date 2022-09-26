@@ -18,7 +18,6 @@ void dfs_child(int node,int p){
 void dfs_hld(int node,int p){
     tin[node]=++tme;
     s.a[tme]=val[node]; // out value in ds
-
     if(child[node]){
         head[child[node]]=head[node];
         dfs_hld(child[node],node);
@@ -31,7 +30,7 @@ void dfs_hld(int node,int p){
     tout[node]=tme;
 }
 bool ancestor(int p,int u){
-    return tin[p]<=tin[u] && tout[p]>=tout[u];
+ return tin[p]<=tin[u] && tout[p]>=tout[u];
 }
 int lca(int u,int v){
     if(ancestor(u,v)) return u;
@@ -58,7 +57,6 @@ int query(int u,int v){
 void update(int node,int x){
     s.update(tin[node],x);
 }
-
 void init(){
     dfs_child(1,1);
     dfs_hld(1,1);

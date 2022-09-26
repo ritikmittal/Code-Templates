@@ -50,9 +50,6 @@ void solve() {
         for(auto &c:component){
             compNo[c]=strongly_components.size();
         }
-        if(component.size()>1){
-            infi[strongly_components.size()]=true;
-        }
         strongly_components.push_back(component);
     }
     for(int i=0;i<n;i++){
