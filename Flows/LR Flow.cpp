@@ -1,5 +1,4 @@
 const int N = 3e5 + 9;
-
 const long long inf = 1LL << 61;
 struct Dinic {
   struct edge {
@@ -13,30 +12,20 @@ struct Dinic {
   vector<vector<edge>> g;
   Dinic() {}
   Dinic(int _n) {
-    n = _n + 10;
-    mxid = 0;
-    g.resize(n);
+    n = _n + 10; mxid = 0; g.resize(n);
   }
   void add_edge(int u, int v, long long w, int id = -1) {
     edge a = {v, (int)g[v].size(), 0, w, id};
     edge b = {u, (int)g[u].size(), 0, 0, -1};//for bidirectional edges cap(b) = w
-    g[u].emplace_back(a);
-    g[v].emplace_back(b);
-    mxid = max(mxid, id);
+    g[u].emplace_back(a); g[v].emplace_back(b); mxid = max(mxid, id);
   }
   bool bfs() {
-    d.assign(n, -1);
-    d[s] = 0;
-    queue<int> q;
-    q.push(s);
+    d.assign(n, -1); d[s] = 0; queue<int> q; q.push(s);
     while (!q.empty()) {
-      int u = q.front();
-      q.pop();
+      int u = q.front(); q.pop();
       for (auto &e : g[u]) {
         int v = e.to;
-        if (d[v] == -1 && e.flow < e.w) d[v] = d[u] + 1, q.push(v);
-      }
-    }
+        if (d[v] == -1 && e.flow < e.w) d[v] = d[u] + 1, q.push(v); } }
     return d[t] != -1;
   }
   long long dfs(int u, long long flow) {
@@ -51,14 +40,11 @@ struct Dinic {
           e.flow += nw;
           g[v][e.rev].flow -= nw;
           return nw;
-        }
-      }
-    }
+        } } }
     return 0;
   }
   long long max_flow(int _s, int _t) {
-    s = _s;
-    t = _t;
+    s = _s; t = _t;
     long long flow = 0;
     while (bfs()) {
       done.assign(n, 0);

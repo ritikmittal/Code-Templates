@@ -3,16 +3,11 @@ const int N = 3e5 + 9;
 using F = long long;
 using W = long long; // types for flow and weight/cost
 struct S {
-  const int v;  // neighbour
-  const int r;  // index of the reverse edge
-  F f;      // current flow
-  const F cap;  // capacity
-  const W cost; // unit cost
+  const int v, r; F f; const F cap; const W cost; 
   S(int v, int ri, F c, W cost = 0) :
     v(v), r(ri), f(0), cap(c), cost(cost) {}
   inline F res() const {
-    return cap - f;
-  }
+    return cap - f; }
 };
 struct FlowGraph : vector<vector<S>> {
   FlowGraph(size_t n) : vector<vector<S>>(n) {}
@@ -33,8 +28,7 @@ struct FlowGraph : vector<vector<S>> {
 //0-indexed
 struct Dinic {
   FlowGraph &edges;
-  int V, s, t;
-  vector<int> l;
+  int V, s, t; vector<int> l;
   vector<vector<S>::iterator> its; // levels and iterators
   Dinic(FlowGraph &edges, int s, int t) :
     edges(edges), V(edges.size()), s(s), t(t), l(V, -1), its(V) {}
@@ -45,34 +39,22 @@ struct Dinic {
       if (e.cap > e.f && l[u] < l[e.v]) {
         auto d = augment(e.v, min(c, e.cap - e.f));
         if (d > 0) {
-          e.f += d;
-          edges[e.v][e.r].f -= d;
-          return d;
-        }
-      }
-    }
-    return 0;
+          e.f += d; edges[e.v][e.r].f -= d; return d;
+        } } } return 0;
   }
   long long run() {
     long long flow = 0, f;
     while(true) {
       fill(l.begin(), l.end(), -1);
-      l[s] = 0; // recalculate the layers
-      queue<int> q;
-      q.push(s);
+      l[s] = 0; queue<int> q; q.push(s);
       while(!q.empty()) {
-        auto u = q.front();
-        q.pop();
+        auto u = q.front(); q.pop();
         for(auto &&e : edges[u]) if(e.cap > e.f && l[e.v] < 0)
-            l[e.v] = l[u] + 1, q.push(e.v);
-      }
+            l[e.v] = l[u] + 1, q.push(e.v); }
       if (l[t] < 0) return flow;
       for (int u = 0; u < V; ++u) its[u] = edges[u].begin();
       while ((f = augment(s, 2e9)) > 0) flow += f;///take care of inf
-    }
-  }
-};
-
+    } } };
 /*For a given weighted graph the Gomory-Hu tree has the following properties:
 The vertex set of the tree and the graph is the same.
 The maximum flow between vertices u and v in the tree(i.e. minimum edge from u to v)
@@ -104,20 +86,13 @@ struct GomoryHuTree {
       for (int j = i + 1; j < V; ++j)
         if (c[j] && p[j] == p[i]) p[j] = i;
       if (p[p[i]] >= 0 && c[p[p[i]]]) {
-        int pi = p[i];
-        swap(w[i], w[pi]);
-        p[i] = p[pi];
-        p[pi] = i;
-      }
-      fg.clear();
-    }
-  }
+        int pi = p[i]; swap(w[i], w[pi]);
+        p[i] = p[pi]; p[pi] = i; }
+      fg.clear(); } }
   const vector<edge> &get_tree() {
     if (tree.empty())
       for (int i = 0; i < V; ++i) {
         if (p[i] >= 0)
-          tree.push_back(edge{i, (int)p[i], w[i]});
-      }
-    return tree;
-  }
+          tree.push_back(edge{i, (int)p[i], w[i]}); }
+    return tree; }
 };
