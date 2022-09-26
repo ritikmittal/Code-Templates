@@ -1,76 +1,23 @@
-vector<int> sieve(const int N, const int Q = 17, const int L = 1 << 15) {
-    static const int rs[] = {1, 7, 11, 13, 17, 19, 23, 29};
-    struct P {
-        P(int p) : p(p) {}
-        int p; int pos[8];
-    };
-    auto approx_prime_count = [] (const int N) -> int {
-        return N > 60184 ? N / (log(N) - 1.1)
-                         : max(1., N / (log(N) - 1.11)) + 1;
-    };
-
-    const int v = sqrt(N), vv = sqrt(v);
-    vector<bool> isp(v + 1, true);
-    for (int i = 2; i <= vv; ++i) if (isp[i]) {
-            for (int j = i * i; j <= v; j += i) isp[j] = false;
-        }
-
-    const int rsize = approx_prime_count(N + 30);
-    vector<int> primes = {2, 3, 5}; int psize = 3;
-    primes.resize(rsize);
-
-    vector<P> sprimes; size_t pbeg = 0;
-    int prod = 1;
-    for (int p = 7; p <= v; ++p) {
-        if (!isp[p]) continue;
-        if (p <= Q) prod *= p, ++pbeg, primes[psize++] = p;
-        auto pp = P(p);
-        for (int t = 0; t < 8; ++t) {
-            int j = (p <= Q) ? p : p * p;
-            while (j % 30 != rs[t]) j += p << 1;
-            pp.pos[t] = j / 30;
-        }
-        sprimes.push_back(pp);
-    }
-
-    vector<unsigned char> pre(prod, 0xFF);
-    for (size_t pi = 0; pi < pbeg; ++pi) {
-        auto pp = sprimes[pi]; const int p = pp.p;
-        for (int t = 0; t < 8; ++t) {
-            const unsigned char m = ~(1 << t);
-            for (int i = pp.pos[t]; i < prod; i += p) pre[i] &= m;
-        }
-    }
-
-    const int block_size = (L + prod - 1) / prod * prod;
-    vector<unsigned char> block(block_size); unsigned char* pblock = block.data();
-    const int M = (N + 29) / 30;
-
-    for (int beg = 0; beg < M; beg += block_size, pblock -= block_size) {
-        int end = min(M, beg + block_size);
-        for (int i = beg; i < end; i += prod) {
-            copy(pre.begin(), pre.end(), pblock + i);
-        }
-        if (beg == 0) pblock[0] &= 0xFE;
-        for (size_t pi = pbeg; pi < sprimes.size(); ++pi) {
-            auto& pp = sprimes[pi];
-            const int p = pp.p;
-            for (int t = 0; t < 8; ++t) {
-                int i = pp.pos[t]; const unsigned char m = ~(1 << t);
-                for (; i < end; i += p) pblock[i] &= m;
-                pp.pos[t] = i;
-            }
-        }
-        for (int i = beg; i < end; ++i) {
-            for (int m = pblock[i]; m > 0; m &= m - 1) {
-                primes[psize++] = i * 30 + rs[__builtin_ctz(m)];
-            }
-        }
-    }
-    assert(psize <= rsize);
-    while (psize > 0 && primes[psize - 1] > N) --psize;
-    primes.resize(psize);
-    return primes;
+// hardcode value of LIM,S,R 
+const int LIM = 1e6;
+bitset<LIM> isPrime;
+vi eratosthenes() {
+	const int S = (int)round(sqrt(LIM)), R = LIM / 2;
+	vi pr = {2}, sieve(S+1); pr.reserve(int(LIM/log(LIM)*1.1));
+	vector<pii> cp;
+	for (int i = 3; i <= S; i += 2) if (!sieve[i]) {
+		cp.push_back({i, i * i / 2});
+		for (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;
+	}
+	for (int L = 1; L <= R; L += S) {
+		array<bool, S> block{};
+		for (auto &[p, idx] : cp)
+			for (int i=idx; i < S+L; idx = (i+=p)) block[i-L] = 1;
+		rep(i,0,min(S, R - L))
+			if (!block[i]) pr.push_back((L + i) * 2 + 1);
+	}
+	for (int i : pr) isPrime[i] = 1;
+	return pr;
 }
 // sz(sieve(1e6)) = 78498
 //sz(sieve(1e8)) = 5761455
