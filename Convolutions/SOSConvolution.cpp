@@ -43,4 +43,4 @@ vll subset_sum_convolution(vll f, vll g) {
     }
     vll fog(1 << B, 0);
     FOR(mask,1LL<<B)  fog[mask] = h[__builtin_popcount(mask)][mask];
-    return fog;
+    return fog;}
