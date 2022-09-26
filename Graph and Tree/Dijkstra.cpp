@@ -16,11 +16,6 @@ void dijkstra(int source)
         {
             if(dist[c.f]>dist[vert]+c.s)
             {
-                if(s.count({dist[c.f],c.f}))
-                    s.erase({dist[c.f],c.f});
-                dist[c.f]=dist[vert]+c.s;
-                s.insert({dist[c.f],c.f});
-            }
-        }
-    }
-}
+                if(s.count({dist[c.f],c.f}))s.erase({dist[c.f],c.f});
+                dist[c.f]=dist[vert]+c.s;s.insert({dist[c.f],c.f});
+            }}}}
