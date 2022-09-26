@@ -1,5 +1,4 @@
-class fente2d {
-public:
+struct fente2d {
     int n, m;
     vector<vector<int>> tree;
     void init(int _n, int _m):n(_n),m(_m){

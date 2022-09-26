@@ -40,9 +40,7 @@ public:
         build(2 * index + 1, mid + 1, se);
         merge(tree[index], tree[2 * index], tree[2 * index + 1]);
     }
-    void build() {
-        build(1, 0, n - 1);
-    }
+    void build() {build(1, 0, n - 1);}
     node query(int index,int ss,int se,int qs,int qe){
         if(prsnt[index]) prop(index,ss,se);
         if (qs > se || qe < ss) return neutral;
@@ -54,9 +52,7 @@ public:
         merge(mer, left, right);
         return mer;
     }
-    node query(int l, int r) {
-        return query(1, 0, n - 1, l, r);
-    }
+    node query(int l, int r) {return query(1, 0, n - 1, l, r);}
     void update(int index, int ss, int se,int l,int r,int inc) {
         if (prsnt[index]) prop(index, ss, se);
         if (r < ss || l > se) return;
@@ -71,7 +67,5 @@ public:
         update(2 * index + 1, mid + 1, se, l, r, inc);
         merge(tree[index], tree[2 * index], tree[2 * index + 1]);
     }
-    void update(int l,int r,int inc) {
-        update(1, 0, n - 1,l,r,inc);
-    }
+    void update(int l,int r,int inc) {update(1, 0, n - 1,l,r,inc);}
 };

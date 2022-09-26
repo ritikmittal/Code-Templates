@@ -1,5 +1,4 @@
-class fenteRange {
-public:
+struct fenteRange {
     int n;
     vector<int> tree[2];
     void init(int _n):n(_n) {

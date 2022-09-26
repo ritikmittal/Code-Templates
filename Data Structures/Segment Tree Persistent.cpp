@@ -1,7 +1,5 @@
-const int N=100001;
-const int SZ=21*N;
-int ptr=1;
-int l[SZ],r[SZ],val[SZ],a[N];
+const int N=100001,SZ=21*N;
+int ptr=1,l[SZ],r[SZ],val[SZ],a[N];
 int node(int left,int right) {
     int pos = ptr;
     l[pos] = left;

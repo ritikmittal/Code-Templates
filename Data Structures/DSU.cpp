@@ -10,8 +10,7 @@ public:
         }
     }
     int par(int i) {
-        if (i == parent[i])
-            return i;
+        if (i == parent[i]) return i;
         return parent[i] = par(parent[i]);
     }
     bool unite(int a, int b) {

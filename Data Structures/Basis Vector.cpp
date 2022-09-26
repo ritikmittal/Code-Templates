@@ -1,6 +1,5 @@
 const int M = 31;
-int basis[M];
-int cnt;
+int basis[M],cnt;
 void init() {
     memset(basis, 0, sizeof basis);
     cnt = 0;

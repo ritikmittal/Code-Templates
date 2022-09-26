@@ -1,5 +1,4 @@
-const int N=200000;
-const int M = 21;
+const int N=200000,M = 21;
 int tab[N+1][M+1],L[N+1],a[N];
 struct st{
     int n;

@@ -1,38 +1,19 @@
-struct Query {
-    int i, l, r, bno;
-};
+struct Query { int i, l, r, bno; };
 bool cmp(Query &a,Query &b) {
-    if (a.bno != b.bno) {
-        return a.bno < b.bno;
-    } else if (a.bno & 1) {
-        return a.r < b.r;
-    } else {
-        return a.r > b.r;
-    }
+    if (a.bno != b.bno) { return a.bno < b.bno;
+    } else if (a.bno & 1) { return a.r < b.r;
+    } else { return a.r > b.r; }
 }
 int n,q;
-const int bs=700;// change is depending on problem
-const int N=500001;
+const int N=500001,bs=700; //change
 Query qry[N];
-int a[N];
-int ans[N];
-int lp,rp,cnt;
-void add(int val) {
-    freq[val]++;
-    if (freq[val] == 1) cnt++;
-}
-void remove(int val) {
-    freq[val]--;
-    if (freq[val] == 0) cnt--;
-}
-int get_answer() {
-    return cnt;
-}
+int a[N],ans[N],lp,rp,cnt;
+void add(int val) {}
+void remove(int val) {}
+int get_answer() {}
 void solve() {
     cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
+    for (int i = 0; i < n; i++) { cin >> a[i];}
     cin >> q;
     for (int i = 0; i < q; i++) {
         int l, r;
@@ -44,12 +25,10 @@ void solve() {
         qry[i].r = r;
         qry[i].bno = l / bs;
     }
-    // sort the queries
     sort(qry, qry + q, cmp);
     // initialise the data-structure
     lp = rp=cnt=0;
     add(a[0]);
-    // answer the queries
     for (int i = 0; i < q; i++) {
         int l = qry[i].l;
         int r = qry[i].r;

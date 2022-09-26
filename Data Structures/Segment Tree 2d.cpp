@@ -1,5 +1,4 @@
-class segte2d{
-public:
+struct segte2d{
     int n,m;
     vector<vector<int>>tr,a;
     segte2d(int _n,int _m,vector<vector<int>>&_a):a(_a),n(_n),m(_m){
@@ -27,9 +26,7 @@ public:
         }
         build_y(vx,0,sx,ex,0,m-1);
     }
-    void build(){
-        build_x(0,0,n-1);
-    }
+    void build(){ build_x(0,0,n-1);}
     void update_y(int vx,int vy,int sx,int ex,int sy,int ey,int x,int y,int val){
         if(sy==ey){
             if(sx==ex){
@@ -57,9 +54,7 @@ public:
         }
         update_y(vx,0,sx,ex,0,m-1,x,y,val);
     }
-    void update(int x,int y,int val){
-        update_x(0,0,n-1,x,y,val);
-    }
+    void update(int x,int y,int val){update_x(0,0,n-1,x,y,val);}
     int query_y(int vx,int vy,int sy,int ey,int qsy,int qey){
         if(qey<sy || qsy>ey){
             return 0;
@@ -83,7 +78,5 @@ public:
         int B=query_x(2*vx+2,qsx,qex,qsy,qey,mx+1,ex);
         return f(A,B);
     }
-    int query(int sx,int ex,int sy,int ey){
-        return query_x(0,sx,ex,sy,ey,0,n-1);
-    }
+    int query(int sx,int ex,int sy,int ey){return query_x(0,sx,ex,sy,ey,0,n-1);}
 };

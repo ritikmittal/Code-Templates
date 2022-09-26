@@ -1,6 +1,4 @@
-//cache friendly
-const int N =1000;
-const int M = 10;
+const int N =1000,M = 10;
 int tab[M+1][M+1][N+1][N+1];
 int L[N+1],a[N+1][N+1],s[N+1][N+1];
 struct st2{

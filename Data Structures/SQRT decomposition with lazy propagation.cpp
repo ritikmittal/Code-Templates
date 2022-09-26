@@ -20,7 +20,6 @@ struct sd{
     }
     void prop(int block_num){
         if(lazy[block_num]==0) return;
-            return;
         for(int j=bl[block_num];j<=br[block_num];j++){
             a[j]+=lazy[block_num];
         }
@@ -30,46 +29,28 @@ struct sd{
     void upd(int l,int r,int x){
         if(bno[l]==bno[r]){
             prop(bno[l]);
-            for(int j=l;j<=r;j++){
-                a[j]+=x;
-                bv[bno[l]]+=x;
-            }
+            for(int j=l;j<=r;j++){a[j]+=x;bv[bno[l]]+=x;}
         }else{
             prop(bno[l]);
-            for(int j=l;j<=br[bno[l]];j++){
-                a[j]+=x;
-                bv[bno[l]]+=x;
-            }
-            for(int j=bno[l]+1;j<bno[r];j++){
-                lazy[j]+=x;
-            }
+            for(int j=l;j<=br[bno[l]];j++){a[j]+=x;bv[bno[l]]+=x;}
+            for(int j=bno[l]+1;j<bno[r];j++){lazy[j]+=x;}
             prop(bno[r]);
-            for(int j=bl[bno[r]];j<=r;j++){
-                a[j]+=x;
-                bv[bno[r]]+=x;
-            }
+            for(int j=bl[bno[r]];j<=r;j++){a[j]+=x;bv[bno[r]]+=x;}
         }
     }
     int qry(int l,int r){
         int tot=0;
         if(bno[l]==bno[r]){
             prop(bno[l]);
-            for(int j=l;j<=r;j++){
-                tot+=a[j];
-            }
+            for(int j=l;j<=r;j++) tot+=a[j];
         }else{
             prop(bno[l]);
-            for(int j=l;j<=br[bno[l]];j++){
-                tot+=a[j];
-            }
-            for(int j=bno[l]+1;j<bno[r];j++){
-                tot+=bv[j];
+            for(int j=l;j<=br[bno[l]];j++){tot+=a[j];}
+            for(int j=bno[l]+1;j<bno[r];j++){tot+=bv[j];
                 tot+=lazy[j]*(br[j]-bl[j]+1);
             }
             prop(bno[r]);
-            for(int j=bl[bno[r]];j<=r;j++){
-                tot+=a[j];
-            }
+            for(int j=bl[bno[r]];j<=r;j++)tot+=a[j];
         }
         return tot;
     }

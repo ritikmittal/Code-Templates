@@ -2,8 +2,7 @@ struct node{
     int val;
     node():val(0){}
 };
-class segte {
-public:
+struct segte {
     int n;
     vector<node> tree;
     vector<int> a;
@@ -18,9 +17,7 @@ public:
     void merge(node &curr, node &left, node &right) {
         curr.val = left.val + right.val;
     }
-    void single(node &curr, int idx) {
-        curr.val = a[idx];
-    }
+    void single(node &curr, int idx) { curr.val = a[idx];}
     void build(int index, int ss, int se) {
         if (ss == se) {
             single(tree[index], ss);

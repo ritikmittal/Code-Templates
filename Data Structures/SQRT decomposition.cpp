@@ -1,11 +1,9 @@
 struct sd{
     vector<int>a,bv,bno,bl,br;
     int n,bsz,bcnt;
-    sd(int _n,vector<int>&_a){
-        n=_n;
+    sd(int _n,vector<int>&_a):n(_n),a(_a){
         bsz=sqrt(n);
         bcnt=(n+bsz-1)/bsz;
-        a=_a;
         bno.resize(n,0);
         bl.resize(bcnt,-1);
         br.resize(bcnt,-1);
@@ -25,19 +23,11 @@ struct sd{
     int qry(int l,int r){
         int tot=0;
         if(bno[l]==bno[r]){
-            for(int j=l;j<=r;j++){
-                tot+=a[j];
-            }
+            for(int j=l;j<=r;j++){tot+=a[j];}
         }else{
-            for(int j=l;j<=br[bno[l]];j++){
-                tot+=a[j];
-            }
-            for(int j=bno[l]+1;j<bno[r];j++){
-                tot+=bv[j];
-            }
-            for(int j=bl[bno[r]];j<=r;j++){
-                tot+=a[j];
-            }
+            for(int j=l;j<=br[bno[l]];j++){tot+=a[j];}
+            for(int j=bno[l]+1;j<bno[r];j++){tot+=bv[j];}
+            for(int j=bl[bno[r]];j<=r;j++){tot+=a[j];}
         }
         return tot;
     }

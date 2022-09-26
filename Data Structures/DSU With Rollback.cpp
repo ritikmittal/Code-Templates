@@ -32,10 +32,7 @@ public:
         flag.push(stk.size());
     }
     void roll_back() {
-        int a = get<0>(stk.top());
-        int b = get<1>(stk.top());
-        int sz = get<2>(stk.top());
-        int rp = get<3>(stk.top());
+        auto [a, b, sz, rp] = stk.top();
         stk.pop();
         comp++;
         parent[a] = rp;
