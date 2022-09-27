@@ -13,10 +13,7 @@ struct st{
         for(int j=1;j<=M;j++){
             for(int i=0;i<n;i++){
                 if(i+(1<<j)-1<n){
-                    tab[i][j]=f(tab[i][j-1],tab[i+(1<<(j-1))][j-1]);
-                }
-            }
-        }
+                    tab[i][j]=f(tab[i][j-1],tab[i+(1<<(j-1))][j-1]);}}}
     }
     // for non-idempotent function
     int qry(int l,int r){

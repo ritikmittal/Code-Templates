@@ -61,9 +61,7 @@ void solve() {
     sort(qry, qry + q, cmp);
     for (int i = 0; i < q; i++) {
         auto &c = qry[i];
-        int l = c.l;
-        int r = c.r;
-        int t = c.t;
+        int l = c.l, r= c.r , t= c.t;
         while (T < t) {T++;update(upd[T].p, upd[T].x);}
         while (T > t) {update(upd[T].p, upd[T].old_val);T--;}
         while (R < r) {R++;add(a[R]);}

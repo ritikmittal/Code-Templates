@@ -4,10 +4,8 @@ struct sd{
     sd(int _n,vector<int>&_a):n(_n),a(_a){
         bsz=sqrt(n);
         bcnt=(n+bsz-1)/bsz;
-        bno.resize(n,0);
-        bl.resize(bcnt,-1);
-        br.resize(bcnt,-1);
-        bv.resize(bcnt,0);
+        bno.resize(n,0);bl.resize(bcnt,-1);
+        br.resize(bcnt,-1);bv.resize(bcnt,0);
         for(int i =0;i<n;i++){
             bno[i]=i/bsz;
             if(bl[bno[i]]==-1) bl[bno[i]]=i;

@@ -6,11 +6,8 @@ struct sd{
         bsz=sqrt(n);
         bcnt=(n+bsz-1)/bsz;
         a=_a;
-        bno.resize(n,0);
-        bl.resize(bcnt,-1);
-        br.resize(bcnt,-1);
-        bv.resize(bcnt,0);
-        lazy.resize(bcnt,0);
+        bno.resize(n,0);bl.resize(bcnt,-1);br.resize(bcnt,-1);
+        bv.resize(bcnt,0);lazy.resize(bcnt,0);
         for(int i =0;i<n;i++){
             bno[i]=i/bsz;
             if(bl[bno[i]]==-1) bl[bno[i]]=i;
