@@ -1,10 +1,8 @@
 struct node{
     unordered_map<int,int>m;
     deque<int>occ;
-    int link=0;
-    int link_to_leaf=0;
+    int link=0,link_to_leaf=0,len=0;
     bool leaf=false;
-    int len=0;
 };
 vector<node>trie(1);
 void add(string &s){
@@ -32,18 +30,11 @@ void make_suffix_link() {
             int ch = c.first;
             int child = c.second;
             int k = trie[node].link;
-            while (k != 0 && !trie[k].m.count(ch)) {
-                k = trie[k].link;
-            }
-            if (trie[k].m.count(ch)) {
-                k = trie[k].m[ch];
-            }
+            while (k != 0 && !trie[k].m.count(ch)) {k = trie[k].link;}
+            if (trie[k].m.count(ch)) {k = trie[k].m[ch];}
             trie[child].link = k;
-            if (trie[k].leaf) {
-                trie[child].link_to_leaf = k;
-            } else {
-                trie[child].link_to_leaf = trie[k].link_to_leaf;
-            }
+            if (trie[k].leaf) {trie[child].link_to_leaf = k;} 
+            else {trie[child].link_to_leaf = trie[k].link_to_leaf;}
             q.push(child);
         }
     }

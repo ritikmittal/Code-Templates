@@ -1,21 +1,12 @@
 struct Hash {
-    vector<int> pref;
-    vector<int> pows;
-    vector<int> i_pows;
-    vector<int> pref_s;
-    vector<int> pows_s;
-    vector<int> i_pows_s;
+    vector<int> pref,pows,i_pows,pref_s,pows_s,i_pows_s;
     int p, m;
     int p_s, m_s;
     explicit Hash(string &s, int _p = 31, int _m = mod, int __p = 53, int __m = mod2) : 
     p(_p), m(_m), p_s(__p),m_s(__m) {
         int n = sz(s);
-        pows.resize(n + 1, 0);
-        pref.resize(n + 1, 0);
-        i_pows.resize(n + 1, 0);
-        pows_s.resize(n + 1, 0);
-        pref_s.resize(n + 1, 0);
-        i_pows_s.resize(n + 1, 0);
+        pows.resize(n + 1, 0);pref.resize(n + 1, 0);i_pows.resize(n + 1, 0);
+        pows_s.resize(n + 1, 0);pref_s.resize(n + 1, 0);i_pows_s.resize(n + 1, 0);
         pows[0] = 1;
         int p_inv = modi(p, m);
         i_pows[0] = 1;

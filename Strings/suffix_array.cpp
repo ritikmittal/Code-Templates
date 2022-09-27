@@ -13,13 +13,9 @@ struct sufar{
         rank.resize(n);
         {
             vector<pair<int,int>>temp;
-            for(int i=0;i<n;i++){
-                temp.push_back({s[i]-'a',i});
-            }
+            for(int i=0;i<n;i++){temp.push_back({s[i]-'a',i});}
             sort(temp.begin(),temp.end());
-            for(int i =0;i<n;i++){
-                order[i]=temp[i].second;
-            }
+            for(int i =0;i<n;i++){order[i]=temp[i].second;}
             rank[order[0]]=0;
             for(int i=1;i<n;i++){
                 rank[order[i]]=rank[order[i-1]]+(temp[i].first!=temp[i-1].first);
@@ -28,16 +24,11 @@ struct sufar{
         int k=0;
         vector<int>order_t(n,0),rank_t(n,0);
         while((1<<k)<n){
-            for(int i =0;i<n;i++){
-                (order[i]-=(1<<k)-n)%=n;
-            }
+            for(int i =0;i<n;i++){(order[i]-=(1<<k)-n)%=n;}
             vector<int>cnt(n,0),pos(n,0);
-            for(auto &c:rank)
-                cnt[c]++;
-            for(int i=1;i<n;i++)
-                pos[i]=pos[i-1]+cnt[i-1];
-            for(int i=0;i<n;i++)
-                order_t[pos[rank[order[i]]]++]=order[i];
+            for(auto &c:rank)cnt[c]++;
+            for(int i=1;i<n;i++)pos[i]=pos[i-1]+cnt[i-1];
+            for(int i=0;i<n;i++)order_t[pos[rank[order[i]]]++]=order[i];
             order=order_t;
             for(int i=1;i<n;i++){
                 pair<int,int>old_val={rank[order[i-1]],rank[(order[i-1]+(1<<k))%n]};
@@ -82,7 +73,6 @@ struct sufar{
             }
         }
         int right=l;
-
         int val=0;
         if(left<=right){
             val=right-left+1;

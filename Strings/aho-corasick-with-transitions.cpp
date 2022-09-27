@@ -1,11 +1,6 @@
 struct node {
-    int link = -1;
-    int ch;
-    int p = -1;
-    int val = 0;
-    int dpVal=-1;
+    int link = -1,ch,p = -1,val = 0,dpVal=-1;
     int next[26], go[26];
-
     node(int p = -1, int ch = -1) : p(p), ch(ch) {
         memset(go, -1, sizeof go);
         memset(next, -1, sizeof next);
@@ -13,9 +8,7 @@ struct node {
 };
 struct AC {
     vector<node> trie;
-    AC() {
-        trie.emplace_back();
-    }
+    AC() {trie.emplace_back();}
     void add(string &s, int b) {
         int cur = 0;
         for (auto &c: s) {
@@ -30,11 +23,8 @@ struct AC {
     }
     int get_link(int idx) {
         if (trie[idx].link == -1) {
-            if (idx == 0 || trie[idx].p == 0) {
-                trie[idx].link = 0;
-            } else {
-                trie[idx].link = go(get_link(trie[idx].p), trie[idx].ch);
-            }
+            if (idx == 0 || trie[idx].p == 0) trie[idx].link = 0;
+            else trie[idx].link = go(get_link(trie[idx].p), trie[idx].ch);
         }
         return trie[idx].link;
     }
@@ -47,13 +37,9 @@ struct AC {
     }
     int go(int idx, int ch) {
         if (trie[idx].go[ch] == -1) {
-            if (trie[idx].next[ch] != -1) {
-                trie[idx].go[ch] = trie[idx].next[ch];
-            } else if (idx == 0) {
-                trie[idx].go[ch] = 0;
-            } else {
-                trie[idx].go[ch] = go(get_link(idx), ch);
-            }
+            if (trie[idx].next[ch] != -1) {trie[idx].go[ch] = trie[idx].next[ch];}
+            else if (idx == 0) {trie[idx].go[ch] = 0;}
+            else {trie[idx].go[ch] = go(get_link(idx), ch);}
         }
         return trie[idx].go[ch];
     }
