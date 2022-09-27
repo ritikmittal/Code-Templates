@@ -1,13 +1,11 @@
+#define FOR(i,a,b) for(ll i=a;i<b;i++)
 const int N=200001;
 const int M=21;
 int par[N][M];
 int n;
 vector<pair<int,int>>g[N];
 vector<pair<int,int>>ag[N];
-int dep[N];
-int dist[N];
-int tin[N];
-int tout[N];
+int dep[N],dist[N],tin[N],tout[N];
 int tme=-1;
 void dfs_par(int node,int p){
     tin[node]=++tme;
@@ -23,19 +21,13 @@ void dfs_par(int node,int p){
 }
 void fill(int root=0){
     dfs_par(root,root);
-    for(int j=1;j<M;j++){
-        for(int i=0;i<n;i++){
-            par[i][j]=par[par[i][j-1]][j-1];
-        }
-    }
+    FOR(j,1,M)FOR(i,0,N)par[i][j]=par[par[i][j-1]][j-1];
 }
 int get_kp(int node,int k){
     for(int j=M-1;j>=0;j--){
         if(k&(1ll<<j)){
             if(node!=-1)
-                node=par[node][j];
-        }
-    }
+                node=par[node][j];}}
     return node;
 }
 int lca(int x,int y){

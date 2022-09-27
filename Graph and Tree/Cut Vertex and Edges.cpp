@@ -1,8 +1,7 @@
 //0 base
 const int N=200001;
 vector<int>gr[N];
-int dis[N];
-int low[N];
+int dis[N],low[N];
 int tme;
 set<int>art_p;
 vector<pair<int,int>>bridge;

@@ -4,10 +4,8 @@ struct twoSat {
     vector<int> compNo, order, assignment;
     vector<bool> vis;
     twoSat(int _n) : n(_n) {
-        g.assign(2 * n, vector<int>());
-        rg.assign(2 * n, vector<int>());
-        compNo.resize(2 * n);
-        vis.resize(2 * n);
+        g.assign(2 * n, vector<int>());rg.assign(2 * n, vector<int>());
+        compNo.resize(2 * n);vis.resize(2 * n);
         assignment.resize( n);
     }
     void addEdge(int u, int v) {
@@ -31,8 +29,7 @@ struct twoSat {
     }
     //only one of them is true (xVy)^(~xV~y)
     void addXor(int u, bool nu, int v, bool nv) {
-        addOr(u, nu, v, nv);
-        addOr(u, !nu, v, !nv);
+        addOr(u, nu, v, nv);addOr(u, !nu, v, !nv);
     }
     //both have to be same (~xVy)^(xV~y)
     void addSame(int u, bool nu, int v, bool nv) {
