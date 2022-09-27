@@ -2,12 +2,10 @@ struct sufar{
     string s;
     vector<int>lcp,order,rank;
     int n;
-
     sufar(string _s){
         s=_s+"$";
         n=s.length();
     }
-
     void build(){
         order.resize(n);
         rank.resize(n);
@@ -55,38 +53,24 @@ struct sufar{
         int l=-1,r=n;
         while(l+1<r){
             int mid=(l+r)/2;
-            if(s.substr(order[mid],m)<p){
-                l=mid;
-            }else{
-                r=mid;
-            }
+            if(s.substr(order[mid],m)<p){l=mid;}
+            else{r=mid;}
         }
         int left=r;
-
         l=-1,r=n;
         while(l+1<r){
             int mid=(l+r)/2;
-            if(s.substr(order[mid],m)<=p){
-                l=mid;
-            }else{
-                r=mid;
-            }
+            if(s.substr(order[mid],m)<=p){l=mid;}
+            else{r=mid;}
         }
-        int right=l;
-        int val=0;
-        if(left<=right){
-            val=right-left+1;
-        }
+        int right=l,val=0;
+        if(left<=right)val=right-left+1;
         return val;
     }
-
     int different_substr(){
         build_lcp();
         int tot=(n*(n-1))/2;
         for(int i=1;i<n;i++) tot-=lcp[i];
         return tot;
     }
-
-};
-
-// can be used to find longest common substring between two string.
+};// can be used to find longest common substring between two string.

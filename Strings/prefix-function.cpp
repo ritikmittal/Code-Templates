@@ -28,10 +28,8 @@ int diffSubStr(string &s){
         reverse(all(rs));
         vector<int>f=prefF(rs);
         int maxPrefF=maxe(all(f));
-        ans+=i+1-maxPrefF;
-    }
-    return ans;
-}
+        ans+=i+1-maxPrefF;}
+    return ans;}
 // period of string
 int period(string &s) {
     int n = sz(s);
@@ -40,8 +38,7 @@ int period(string &s) {
     if (n % per != 0) {
         return n;
     }
-    return per;
-}
+    return per;}
 // automata over prefix function
 // aut[i][j] gives prefix function value
 // if previous prefix function values is i
@@ -53,12 +50,8 @@ vector<vector<int>> automata(string &s) {
     vector<vector<int>> aut(n+1, vector<int>(26, 0));
     for (int i = 0; i <= n; i++) {
         for (int c = 0; c < 26; c++) {
-            if (i > 0 && 'a' + c != s[i]) {
-                aut[i][c] = aut[pf[i - 1]][c];
-            } else {
-                aut[i][c] = i + ('a' + c == s[i]);
-            }
-        }
-    }
+            if (i > 0 && 'a' + c != s[i]) {aut[i][c] = aut[pf[i - 1]][c];} 
+            else {aut[i][c] = i + ('a' + c == s[i]);}
+        }}
     return aut;
 }

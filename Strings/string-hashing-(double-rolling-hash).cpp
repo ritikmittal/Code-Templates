@@ -25,8 +25,7 @@ struct Hash {
         }
     }
     pair<int, int> get(int l, int r) {
-        ++l;
-        ++r;
+        ++l;++r;
         return {((pref[r] - pref[l - 1] + m) * i_pows[l - 1]) % m,
                 ((pref_s[r] - pref_s[l - 1] + m_s) * i_pows_s[l - 1]) % m_s};
     }
