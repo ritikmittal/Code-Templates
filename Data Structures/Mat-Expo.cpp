@@ -3,7 +3,7 @@ int n;
 m.resize(n,vector<int>(n,0));
 mat operator*(mat const &b) {
     mat ans(n);
-    rep(i,0,n) rep(j,0,n) rep(k,0,n)
+    FOR(i,0,n) FOR(j,0,n) FOR(k,0,n)
     (ans.m[i][j] += m[i][k] * b.m[k][j])%=mod;
     return ans;
 }

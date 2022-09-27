@@ -11,18 +11,12 @@ struct pt {
     pt &operator/=(T t) {x /= t;y /= t;return *this;}
     pt &operator=(pt b) {x = b.x;y = b.y;return *this;}
     bool operator<(const pt &a) const {
-        if (a.x == x) {
-            return y < a.y;
-        } else {
-            return x < a.x;
-        }
+        if (a.x == x) return y < a.y;
+        else return x < a.x;
     }
     bool operator>(const pt &a) const {
-        if (a.x == x) {
-            return y > a.y;
-        } else {
-            return x > a.x;
-        }
+        if (a.x == x) return y > a.y;
+        else return x > a.x;
     }
 };
 bool operator==(pt a, pt b) {return a.x == b.x && a.y == b.y;}
@@ -36,9 +30,7 @@ template <typename T> int sgn(T x) {
     return (T(0) < x) - (x < T(0));
 }
 pt translate(pt v,pt p) {return p+v;}
-pt scale(pt c,ld factor,pt p) {
-    return c + (p - c) * factor;
-}
+pt scale(pt c,ld factor,pt p) {return c + (p - c) * factor;}
 int latticePoints(pt a,pt b) {
     return gcd((int)(abs(a.x - b.x)), (int)(abs(a.y - b.y))) - 1;
 }
@@ -49,9 +41,7 @@ pt rot(pt p, ld a) {
 // rotate point perpendicular though origin in counterclockwise
 pt prep(pt p) {return {-p.y, p.x};}
 // rotate vector p by angle a around vector c as center, counterclockwise
-pt rot(pt c, pt b, ld a) {
-    return c + rot(b - c, a);
-}
+pt rot(pt c, pt b, ld a) {return c + rot(b - c, a);}
 pt linearTransformation(pt p,pt q,pt r,pt fp,pt fq) {
     return fp + (r - p) * ((fq - fp).x / (q - p).x);
 }
@@ -69,10 +59,8 @@ T cross(pt v, pt w) {return v.x*w.y - v.y*w.x;}
 T orient(pt a, pt b, pt c) {return cross(b-a,c-a);}
 // angle made at a while we turn from b to c around a [0,2*PI]
 ld orientedAngle(pt a,pt b,pt c) {
-    if (orient(a, b, c) >= 0)
-        return angle(b - a, c - a);
-    else
-        return 2 * PI - angle(b - a, c - a);
+    if (orient(a, b, c) >= 0) return angle(b - a, c - a);
+    else return 2 * PI - angle(b - a, c - a);
 }
 // amplitude travelled around point A, from P to Q [-PI,PI]
 ld angleTravelled(pt a,pt p,pt q) {
@@ -151,10 +139,8 @@ bool onSegment(pt a,pt b,pt p) {
 }
 //if segment [a,b], [c,d] intersection properly(~endpoints)
 bool properInter(pt a,pt b,pt c,pt d,pt &out) {
-    ld oa = orient(c, d, a);
-    ld ob = orient(c, d, b);
-    ld oc = orient(a, b, c);
-    ld od = orient(a, b, d);
+    ld oa = orient(c, d, a), ob = orient(c, d, b);
+    ld oc = orient(a, b, c), od = orient(a, b, d);
     if (oa * ob < 0 && oc * od < 0) {
         out = (a * ob - b * oa) / (ob - oa);
         return true;
@@ -223,9 +209,7 @@ bool counterClockwise(vector<pt>&p) {
     }
     return area > 0;
 }
-bool above(pt a,pt p) {
-    return p.y >= a.y;
-}
+bool above(pt a,pt p) {return p.y >= a.y;}
 //check if [PQ] crosses ray from A(going right)
 bool crossesRay(pt a,pt p,pt q) {
     return (above(a, q) - above(a, p)) * orient(a, p, q) > 0;
@@ -273,9 +257,7 @@ struct ang {
 int windingNumberInt(vector<pt>p,pt o) {
     for (auto &c: p) c -= o;
     ang g = ang(p.back());
-    for (auto &d: p) {
-        g = g.moveTo(g, d);
-    }
+    for (auto &d: p) {g = g.moveTo(g, d);}
     return g.t;
 }
 pt circumCenter(pt a,pt b,pt c) {
@@ -325,11 +307,8 @@ int tangents(pt o1, double r1, pt o2, double r2, bool inner, vector<pair<pt,pt>>
 // reorder by first element being left bottom point
 void reorder(vector<pt>&a){
     int pos=0;
-    for(int i=1;i<a.size();i++){
-        if(a[i].x<a[pos].x || (a[i].x==a[pos].x && a[i].y<a[pos].y)){
-            pos=i;
-        }
-    }
+    for(int i=1;i<a.size();i++)
+        if(a[i].x<a[pos].x || (a[i].x==a[pos].x && a[i].y<a[pos].y))pos=i;
     rotate(a.begin(),a.begin()+pos,a.end());
 }
 //inputs points are sorted in counterclockwise order
