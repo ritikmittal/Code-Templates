@@ -5,9 +5,7 @@ const int N=2501;
 int d[N],par[N],n;
 vector<edge>e;
 vector<int> negative_cycle_in_graph() {
-    for (int i = 0; i < n; i++) {
-        d[i] = 0;
-    }
+    for (int i = 0; i < n; i++) {d[i] = 0;}
     int x;
     for (int i = 0; i < n - 1; i++) {
         bool any = false;

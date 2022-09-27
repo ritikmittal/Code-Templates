@@ -13,16 +13,11 @@ void dfs(int node,int par) {
             child++;
             dfs(c, node);
             low[node] = min(low[node], low[c]);
-            if (par != -1 && low[c] >= dis[node]) {
-                art_p.insert(node);
-            }
-            if (low[c] > dis[node]) {
-                bridge.push_back({node, c});
-            }
+            if (par != -1 && low[c] >= dis[node]) {art_p.insert(node);}
+            if (low[c] > dis[node]) {bridge.push_back({node, c});}
         } else if (c != par) {
             low[node] = min(low[node], dis[c]);
         }
     }
-    if (par == -1 && child > 1)
-        art_p.insert(1);
+    if (par == -1 && child > 1)art_p.insert(1);
 }

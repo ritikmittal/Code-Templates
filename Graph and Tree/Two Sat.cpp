@@ -24,9 +24,7 @@ struct twoSat {
         addEdge(nx, y);
     }
     //(x,nx) must be true
-    void addTrue(int x,bool nx) {
-        addOr(x, nx, x, nx);
-    }
+    void addTrue(int x,bool nx) {addOr(x, nx, x, nx);}
     //only one of them is true (xVy)^(~xV~y)
     void addXor(int u, bool nu, int v, bool nv) {
         addOr(u, nu, v, nv);addOr(u, !nu, v, !nv);

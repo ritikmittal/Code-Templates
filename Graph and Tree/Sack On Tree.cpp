@@ -17,35 +17,25 @@ void remove(int node){}
 int get_ans() {}
 void sack_dfs(int node,int p,bool keep) {
     int big = 0;
-    for (auto &c: v[node]) {
-        if (c != p && sz[big] < sz[c])
-            big = c;
-    }
-    for (auto &c: v[node]) {
-        if (c != p && c != big) {
-            sack_dfs(c, node, false);
-        }
-    }
+    for (auto &c: v[node]) 
+        if (c != p && sz[big] < sz[c]) big = c;
+    for (auto &c: v[node]) 
+        if (c != p && c != big) sack_dfs(c, node, false);
     if (big) {
         sack_dfs(big, node, true);
         swap(subtree[big], subtree[node]);
     }
     subtree[node].push_back(node);
     add(node);
-    for (auto &c: v[node]) {
-        if (c != p && c != big) {
+    for (auto &c: v[node]) 
+        if (c != p && c != big) 
             for (auto &d: subtree[c]) {
                 add(d);
                 subtree[node].push_back(d);
             }
-        }
-    }
     ans[node]=get_ans();
-    if (!keep) {
-        for (auto &c: subtree[node]) {
-            remove(c);
-        }
-    }
+    if (!keep) 
+        for (auto &c: subtree[node]) remove(c);
 }
 // sz_dfs(1);
 // sack_dfs(1,0,false);

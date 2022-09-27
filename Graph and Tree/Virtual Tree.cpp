@@ -42,12 +42,8 @@ int lca(int x,int y){
     }
     return par[x][0];
 }
-bool cmp(int a,int b){
-    return tin[a]<tin[b];
-}
-bool anc(int x,int y){
-    return tin[x]<=tin[y] && tout[x]>=tout[y];
-}
+bool cmp(int a,int b){return tin[a]<tin[b];}
+bool anc(int x,int y){return tin[x]<=tin[y] && tout[x]>=tout[y];}
 void create_ag(vector<int>&v){
     sort(v.begin(),v.end(),cmp);
     int k=v.size();

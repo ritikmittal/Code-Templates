@@ -5,10 +5,7 @@ const int N=2501;
 int d[N],par[N],n;
 vector<edge>e;
 void bellman_ford(int source) {
-    for (int i = 0; i < n; i++) {
-        d[i] = inf;
-        par[i] = -1;
-    }
+    for (int i = 0; i < n; i++) {d[i] = inf;par[i] = -1;}
     d[source] = 0;
     for (int i = 0; i < n - 1; i++) {
         bool any = false;
