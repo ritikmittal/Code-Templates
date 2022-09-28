@@ -3,5 +3,4 @@
 ll x=bit;
 ll ss=0;
 do{
-
 }while(ss=(ss-x)&x);
