@@ -1,0 +1,33 @@
+// RANDOM here
+const ll maxn=2e5+25;
+vector<pair<ll,ll>>g[maxn];
+ll dist[maxn],in[maxn];
+ll n,m;
+void SPFA(ll source,ll n)
+{
+    for(ll i=0;i<n;i++){dist[i]=INF;in[i]=0;}
+    deque<ll> q={source};
+    dist[source]=0;
+    in[source]=1;
+    ll tg = rng() % 45 + 3, now = 0;
+    while(!q.empty()) {
+        ll u = q.front(); q.pop_front();
+        in[u] = 0;
+        for(auto x: g[u])
+        {
+            ll v=x.first,w=x.second;
+            if(dist[v] > dist[u] + w) {
+                dist[v] = dist[u] + w;
+                if(!in[v]) {
+                    in[v] = 1;now++;
+                    if(now == tg) tg = rng() % 45 + 3, now = 0, q.push_front(v);
+                    else q.push_back(v);
+                }
+            }
+        }
+    }
+}
+// FOR 2*10**5 edges works under 1.5 sec [optimise with int if needed]
+// DONT USE FOR -ve cycles
+// This algorithm finds shortest path even with negative edges
+// Expected Time Complexity = (10*E) or (5*E)
