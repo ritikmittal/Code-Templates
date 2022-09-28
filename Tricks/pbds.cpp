@@ -22,4 +22,8 @@ tree < pair<int, int>, null_type, less<pair<int, int>>, rb_tree_tag, my_node_upd
 typedef tree< int,null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
 ordered_set X; end(X)==X.find_by_order(k) // find iterator to the k-th largest element
 X.order_of_key(y) // return #count of ele less than y
-
+// Hash table
+struct chash { // large odd number for C
+    const uint64_t C = ll(4e18 * acos(0)) | 71;
+    ll operator()(ll x) const { return __builtin_bswap64(x*C); }};
+__gnu_pbds::gp_hash_table<ll,int,chash> h({},{},{},{},{1<<16});
