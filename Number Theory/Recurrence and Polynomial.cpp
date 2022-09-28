@@ -24,7 +24,8 @@ vector<ll> berlekampMassey(vector<ll> s) {
 //{0, 1, 1, 2, 3, 5} {1, 1}, {0, 1, 1, 1, 0, -1} {1, 0, 1000000006}
 //{0, 1, 423, 43, 0, 543} {402187050, 874879090, 632104496}
 
-typedef vector<double> vd;
+
+//For numerical precision, pick x[k] = c ∗ cos(k/(n − 1) ∗ π), k = 0 . . . n − 1.
 vd interpolate(vd x, vd y, int n) {
     vd res(n), temp(n);
     rep(k,0,n-1) rep(i,k+1,n)
@@ -36,4 +37,13 @@ vd interpolate(vd x, vd y, int n) {
         temp[i] -= last * x[k];
     }
     return res;
+}
+//For dividing Polynomial, if the diff in deg is small or 1 of them is small,do normal div otherwise A*B.inverse(d1-d2+1);
+poly inverse(int n) const {  // 1 / p(x) % x^n, O(nlogn)
+    assert(a[0] != 0);//check a0 of polynmial
+    poly ans{mint(1) / a[0]};//mod_xk(n) is first n terms
+    for(int i = 1; i < n; i *= 2) {
+        ans = (ans * mint(2) - ans * ans * mod_xk(2 * i)).mod_xk(2 * i);
+    }
+    return ans.mod_xk(n);
 }
