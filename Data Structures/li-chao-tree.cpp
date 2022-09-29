@@ -7,27 +7,17 @@ struct lct {
     vector<line> tree;
     int n;
     lct(int _n) : n(_n) { tree.resize(4 * n + 1); }
-    int sgn(int x) {
-        if (x == 0) return 0;
-        if (x < 0) return -1;
-        return 1;
-    }
+    int sgn(int x) {if (x == 0) return 0; if (x < 0) return -1; return 1;}
     void upd(int i, int s, int e, line l) {
-        if (s == e) {
-            if (l(s) < tree[i](s)) tree[i] = l;
-            return;
-        }
+        if (s == e) { if (l(s) < tree[i](s)) tree[i] = l;
+            return ;} 
         int m = (s + e) / 2;
-        int fir = (l(s) - tree[i](s));
-        int sec = (l(m) - tree[i](m));
+        int fir = (l(s) - tree[i](s)),sec=(l(m) - tree[i](m));
         if (sgn(fir) * sgn(sec) <= 0) {
-            if (l(e) < tree[i](e))
-                swap(tree[i], l);
+            if (l(e) < tree[i](e)) swap(tree[i], l);
             upd(2 * i, s, m, l);
         } else {
-            if (l(m) < tree[i](m)) {
-                swap(tree[i], l);
-            }
+            if (l(m) < tree[i](m)) { swap(tree[i], l);}
             upd(2 * i + 1, m + 1, e, l);
         }
     }
@@ -35,10 +25,8 @@ struct lct {
     int qry(int i, int s, int e, int x) {
         if (s == e) return tree[i](x);
         int m = (s + e) / 2;
-        if (x <= m)
-            return min({tree[i](x), qry(2 * i, s, m, x)});
-        else
-            return min({tree[i](x), qry(2 * i + 1, m + 1, e, x)});
+        if (x <= m) return min({tree[i](x), qry(2 * i, s, m, x)});
+        else return min({tree[i](x), qry(2 * i + 1, m + 1, e, x)});
     }
     int qry(int x) { return qry(1, 0, n - 1, x);}
 };
