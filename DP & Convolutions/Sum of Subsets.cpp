@@ -1,14 +1,3 @@
-
-/* Sum Over Subsets => Use bitsets, if only root(n) distinct values use*/
-void split(map<ll,ll> mp){
-    vpll nvec={{-1,-1}};
-    forx(mp){
-        ll v=x.first,t=x.second;
-        ll tt=t,c=1;
-        while(tt>=c){nvec.push_back({v*c,c});tt-=c;c*=2;}
-        if(tt>0)nvec.push_back({v*tt,tt});
-    }
-}
 //If elements less than d (O(N*d)) , Useful to check if some element is possible
 // cannot use for getting all possible submasks
 vector<bool> subset_sum(const vector<int> &a,int tgt){

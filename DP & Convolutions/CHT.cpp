@@ -1,14 +1,12 @@
-using T = ll; // a/b rounded down
+using T = ll;
 ll fdiv(ll a, ll b) { return a/b-((a^b)<0&&a%b); }
 
 bool _Q = 0;
 struct Line {
     T a, b; mutable T lst;
-    /// friend str ts(const Line& L) { return ts(vl{L.a,L.b,L.lst}); }
     T eval(T x) const { return a*x+b; }
     bool operator<(const Line&o)const{return _Q?lst<o.lst:a<o.a;}
     T last_gre(const Line& o) const { assert(a <= o.a);
-        // greatest x s.t. a*x+b >= o.a*x+o.b
         return lst=(a==o.a?(b>=o.b?INF:-INF):fdiv(b-o.b,o.a-a));}
 };
 
@@ -34,16 +32,14 @@ struct LCdeque : deque<Line> {
         while (1) {
             auto a = back(); pop_back(); a.lst = a.last_gre(L);
             if (size() && back().lst >= a.lst) continue;
-            push_back(a); break;
-        }
+            push_back(a); break;}
         L.lst = INF; push_back(L);
     }
     void addFront(Line L) {
         while (1) {
             if (!size()) { L.lst = INF; break; }
             if (((L.lst = L.last_gre(front()))) >= front().lst) pop_front();
-            else break;
-        }
+            else break;}
         push_front(L);
     }
     void add(T a, T b) { // line goes to one end of deque
@@ -56,12 +52,7 @@ struct LCdeque : deque<Line> {
         assert(ord);
         if (ord == 1) {
             while (front().lst < x) pop_front();
-            return front().eval(x);
-        } else {
+            return front().eval(x);} 
+        else {
             while(size()>1&&prev(prev(end()))->lst>=x)pop_back();
-            return back().eval(x);
-        }
-    }
-};
-//LCDeque() => set order of query , use add to add a line Amortized O(N)
-//LineContainer() =>use add and qmax, uAmortized O(Nlog(N))
+            return back().eval(x);}}};
