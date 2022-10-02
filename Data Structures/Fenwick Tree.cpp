@@ -15,13 +15,11 @@ struct fente {
         return sum;
     }
     int bs(int k) {
-        int pos = 0;
-        int cur = 0;
+        int pos = 0,cur = 0;
         for (int i = 30; i >= 0; i--) {
             int which = (pos | (1 << i));
             if (which <= n && cur + tree[which] < k) {
-                cur += tree[which];
-                pos = which;
+                cur += tree[which]; pos = which;
             }
         }
         return pos;
