@@ -9,9 +9,7 @@ void sz_dfs(int node,int p=0) {
         if (c != p) {
             sz_dfs(c, node);
             sz[node] += sz[c];
-        }
-    }
-}
+        }}}
 void add(int node){}
 void remove(int node){}
 int get_ans() {}

@@ -17,8 +17,7 @@ void sz_cal(int node,int par=-1){
         if(del[e] || c==par) continue;
         sz_cal(c,node);
         sz[node]+=sz[c];
-    }
-}
+}}
 int cent(int node,int par=-1){
     for(auto &e:eg[node]){
         int c=adj(e,node);
@@ -27,8 +26,7 @@ int cent(int node,int par=-1){
             return cent(c,node);
         }
     }
-    return node;
-}
+    return node;}
 // function calculation
 set<int>unite(set<int>&a,set<int>&b){}
 void dfs(int node,int par,int lvl,set<int>cur){
@@ -37,8 +35,7 @@ void dfs(int node,int par,int lvl,set<int>cur){
         int c=adj(e,node);
         if(del[e] ||c==par) continue;
         dfs(c,node,lvl,unite(cur,a[c]));
-    }
-}
+}}
 void decompose(int vert, int cent_par = 0) {
     nodes = 0;
     sz_cal(vert);
@@ -52,15 +49,12 @@ void decompose(int vert, int cent_par = 0) {
         if(del[e]) continue;
         del[e]=true;
         decompose(c, child);
-    }
-}
+}}
 int lca(int x,int y){
     if(level[x]>level[y]) swap(x,y);
     while(level[y]>level[x]) y=c_par[y];
     while(x!=y) x=c_par[x],y=c_par[y];
-    return x;
-}
+    return x;}
 set<int> qry(int x,int y){
     int l=lca(x,y);
-    return unite(f[level[l]][x],f[level[l]][y]);
-}
+    return unite(f[level[l]][x],f[level[l]][y]);}
