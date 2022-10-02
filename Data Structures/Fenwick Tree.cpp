@@ -1,6 +1,5 @@
 //1-base
-class fente {
-public:
+struct fente {
     int n;
     vector<int> tree;
     void init(int _n) :n(_n){

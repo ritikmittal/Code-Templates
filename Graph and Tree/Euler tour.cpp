@@ -1,15 +1,3 @@
-const int N=200001;
-vector<int>ord;
-int tin[N],tout[N];
-int tme=-1;
-vector<int>v[N];
-//subtree of x is subarray in array ord from [tin[x],tout[x]]
-void eut_1(int node,int p){
-    tin[node]=++tme;
-    ord.push_back(node);
-    for(auto &c:v[node])if(c!=p)eut_1(c,node);
-    tout[node]=tme;
-}
 //Subtree of x is subarray from [tin[x],tout[x]] but twice,for path u->v, where u is ancestor of v [tin[u],tin[v]] has only opening occurrence for the nodes on the path every other node have double occurrence for path u->v, tout[u]<tin[v],subarray [tout[u],tin[v]] contain single(both) occurrence for path node ( except lca) and double occurrence for non path node
 void eut_2(int node,int p){
     tin[node]=++tme;
@@ -33,17 +21,4 @@ void eut_3(int node,int p){
         }
     }
     tout[node]=tme;
-}
-// in eut_2 we can make opening and closing array different to support subtree update and path query subtree of x is in ord0-> [tin0[x],tout0[x]], in ord1-> [tin1[x],tout1[x]] path of root to x in ord0-> [0,tin0[x]], in ord1-> [0,tin1[x]-1]
-int tin0[N],tout0[N],tin1[N],tout1[N];
-int tme0=-1,tme1=-1;
-vector<int>ord0,ord1;
-void eut_4(int node,int p){
-    tin0[node]=++tme0;
-    ord0.push_back(node);
-    tin1[node]=tme1+1;
-    for(auto &c:v[node])if(c!=p)eut_4(c,node);
-    tout0[node]=tme0;
-    tout1[node]=++tme1;
-    ord1.push_back(node);
 }

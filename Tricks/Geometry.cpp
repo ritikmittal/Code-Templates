@@ -19,15 +19,8 @@ struct pt {
         else return x > a.x;
     }
 };
-bool operator==(pt a, pt b) {return a.x == b.x && a.y == b.y;}
-bool operator!=(pt a, pt b) {return !(a == b);}
-T sq(pt p) {return p.x*p.x + p.y*p.y;}
-ld abs(pt p) {return sqrt(sq(p));}
 ostream& operator<<(ostream& os, pt p) {
     return os << "("<< p.x << "," << p.y << ")";
-}
-template <typename T> int sgn(T x) {
-    return (T(0) < x) - (x < T(0));
 }
 pt translate(pt v,pt p) {return p+v;}
 pt scale(pt c,ld factor,pt p) {return c + (p - c) * factor;}
@@ -45,8 +38,6 @@ pt rot(pt c, pt b, ld a) {return c + rot(b - c, a);}
 pt linearTransformation(pt p,pt q,pt r,pt fp,pt fq) {
     return fp + (r - p) * ((fq - fp).x / (q - p).x);
 }
-T dot(pt a, pt b) {return a.x*b.x + a.y*b.y;}
-bool isPrep(pt a,pt b){ return dot(a,b)==0;}
 ld angle(pt a,pt b) {
     ld cosTheta = dot(a, b) / abs(a) / abs(b);
     cosTheta = min(cosTheta, ld(1.0));
@@ -180,9 +171,6 @@ ld segSegDist(pt a,pt b,pt c,pt d) {
                        segPointDist(c, d, b)
                });
 }
-ld areaTriangle(pt a,pt b,pt c) {
-    return abs(cross(b - a, c - a)) / 2.0;
-}
 // counterclockwise order,if in clockwise order
 // area is negative for both concave and convex
 ld areaPolygon(vector<pt>&p) {
@@ -191,13 +179,6 @@ ld areaPolygon(vector<pt>&p) {
         area += cross(p[i], p[(i + 1) % n]);
     }
     return abs(area) / 2.0;
-}
-int areaPolygonTw(vector<pt>&p) {
-    int area = 0;
-    for (int i = 0, n = p.size(); i < n; i++) {
-        area += cross(p[i], p[(i + 1) % n]);
-    }
-    return abs(area);
 }
 // point in order of convex polygon
 // if area is greater than zero then points are in counterClockwise

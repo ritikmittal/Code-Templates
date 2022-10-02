@@ -19,26 +19,6 @@ vector<int> freq(string &s) {
     for (int i = 0; i <= n; i++) cnt[i] += 1;
     return cnt;
 }
-// number of different substrings of string
-int diffSubStr(string &s){
-    int n=sz(s);
-    int ans=0;
-    for(int i=0;i<n;i++){
-        string rs=s.substr(0,i+1);
-        reverse(all(rs));
-        vector<int>f=prefF(rs);
-        int maxPrefF=maxe(all(f));
-        ans+=i+1-maxPrefF;}
-    return ans;}
-// period of string
-int period(string &s) {
-    int n = sz(s);
-    vector<int> f = prefF(s);
-    int per = n - f[n - 1];
-    if (n % per != 0) {
-        return n;
-    }
-    return per;}
 // automata over prefix function
 // aut[i][j] gives prefix function value
 // if previous prefix function values is i

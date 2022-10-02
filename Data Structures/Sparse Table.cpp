@@ -17,9 +17,7 @@ struct st{
     }
     // for non-idempotent function
     int qry(int l,int r){
-        int len=r-l+1;
-        int idx=l;
-        int tot=0;
+        int len=r-l+1,idx=l,tot=0;
         for(int j=M;j>=0;j--){
             if(len&(1ll<<j)){
                 tot=f(tot,tab[idx][j]);

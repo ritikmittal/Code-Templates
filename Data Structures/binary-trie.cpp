@@ -6,7 +6,7 @@ public:
 class BT{
 public:
     vector<node>t;
-    int M;
+    Aint M;
     BT(int m=30):M(m) {
         t.emplace_back();
     }

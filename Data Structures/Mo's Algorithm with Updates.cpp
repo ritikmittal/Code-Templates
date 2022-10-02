@@ -12,20 +12,13 @@ bool cmp(Query &p,Query &q) {
     }
     return p.lBno < q.lBno;
 }
-//x as value
-void add(int x) {}
-void remove(int x) {}
 void update(int p,int x) {
     if (p >= L && p <= R) {
         remove(a[p]);add(x);
     }
     a[p] = x;
 }
-int get_answer() {}
 void solve() {
-    int n, q;
-    cin >> n >> q;
-    for (int i = 0; i < n; i++) { cin >> a[i];}
     int up = 0;
     int qr = 0;
     for (int i = 0; i < q; i++) {
@@ -68,6 +61,4 @@ void solve() {
         while (L > l) {--L;add(a[L]);}
         while (R > r) {remove(a[R]);--R;}
         while (L < l) {remove(a[L]);++L;}
-        ans[c.idx] = get_answer();
-    }
-}
+        ans[c.idx] = get_answer();}}
