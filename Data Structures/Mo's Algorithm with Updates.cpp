@@ -8,44 +8,34 @@ int L=-1,R=-1,T=0;
 bool cmp(Query &p,Query &q) {
     if (p.lBno == q.lBno) {
         if (p.rBno == q.rBno) return p.t < q.t;
-        return p.rBno < q.rBno;
-    }
-    return p.lBno < q.lBno;
-}
+        return p.rBno < q.rBno;}
+    return p.lBno < q.lBno;}
 void update(int p,int x) {
     if (p >= L && p <= R) {
-        remove(a[p]);add(x);
-    }
-    a[p] = x;
-}
+        remove(a[p]);add(x);}
+    a[p] = x;}
 void solve() {
-    int up = 0;
-    int qr = 0;
+    int up = 0;int qr = 0;
     for (int i = 0; i < q; i++) {
-        int t;
-        cin >> t;
-        if (t == 1) {
-            int l, r;
-            cin >> l >> r;
-            --l;
-            --r;
-            qry[qr].l = l;
-            qry[qr].lBno = l / bs;
-            qry[qr].r = r;
-            qry[qr].rBno = r / bs;
-            qry[qr].t = up;
-            qry[qr].idx = qr;
-            qr++;
-        } else {
-            int p, x;
-            cin >> p >> x;
-            --p;
-            up++;
-            upd[up].p = p;
-            upd[up].old_val = temp[p];
-            temp[p] = x;
-            upd[up].x = temp[p];
-        }
+    int t;
+    cin >> t;
+    if (t == 1) {
+        int l, r;
+        cin >> l >> r;
+        --l;
+        --r;
+        qry[qr].l = l;qry[qr].lBno = l / bs;
+        qry[qr].r = r;qry[qr].rBno = r / bs;
+        qry[qr].t = up;qry[qr].idx = qr;
+        qr++;
+    } else {
+        int p, x;
+        cin >> p >> x;
+        --p;
+        up++;
+        upd[up].p=p;upd[up].old_val=temp[p];
+        temp[p] = x;upd[up].x = temp[p];
+    }
     }
     L = 0, R = 0, T = 0;
     add(a[L]);
