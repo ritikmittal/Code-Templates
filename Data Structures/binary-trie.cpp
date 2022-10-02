@@ -1,85 +1,69 @@
-class node {
-public:
-    int left, right, cnt;
-    node():left(0),right(0),cnt(0) {}
-};
-class BT{
-public:
-    vector<node>t;
-    Aint M;
-    BT(int m=30):M(m) {
-        t.emplace_back();
-    }
-    void insert(int num) {
-        int idx = 0;
-        t[idx].cnt++;
+struct node {int l, r, cnt;
+    node():l(0),r(0),cnt(0) {}};
+struct BT{
+    vector<node>t;int M;
+    BT(int m=30):M(m) {t.eb();}
+    void insert(int a) {
+        int idx = 0;t[idx].cnt++;
         for (int i = M; i >= 0; i--) {
-            if (num & (1ll << i)) {
-                if (!t[idx].right) {
-                    t[idx].right = sz(t);
-                    t.emplace_back();
+            if (a & (1ll << i)) {
+                if (!t[idx].r) {
+                t[idx].r = sz(t);t.eb();
                 }
-                idx = t[idx].right;
+                idx = t[idx].r;
             } else {
-                if (!t[idx].left) {
-                    t[idx].left = sz(t);
-                    t.emplace_back();
+                if (!t[idx].l) {
+                t[idx].l = sz(t);t.eb();
                 }
-                idx = t[idx].left;
+                idx = t[idx].l;
             }
             t[idx].cnt++;
         }
     }
-    bool isPresent(int num) {
+    bool isPresent(int a) {
         int idx = 0;
         for (int i = M; i >= 0; i--) {
-            if (num & (1ll << i)) {
-                if ((!t[idx].right) || (t[t[idx].right].cnt == 0)) {
+            if (a & (1ll << i)) {
+                if ((!t[idx].r) || (t[t[idx].r].cnt == 0)) {
                     return false;
                 }
-                idx = t[idx].right;
+                idx = t[idx].r;
             } else {
-                if ((!t[idx].left) || (t[t[idx].left].cnt == 0)) {
+                if ((!t[idx].l) || (t[t[idx].l].cnt == 0)) {
                     return false;
                 }
-                idx = t[idx].left;
+                idx = t[idx].l;
             }
         }
         return true;
     }
-    bool remove(int num) {
-        if (!isPresent(num)) return false;
-        int idx = 0;
-        t[idx].cnt--;
+    bool remove(int a) {
+        if (!isPresent(a)) return false;
+        int idx = 0;t[idx].cnt--;
         for (int i = M; i >= 0; i--) {
-            if (num & (1ll << i)) {
-                idx = t[idx].right;
-            } else {
-                idx = t[idx].left;
-            }
+            if (a & (1ll << i)) idx = t[idx].r;
+            else idx = t[idx].l;
             t[idx].cnt--;
         }
         return true;
     }
-    int min_xor(int num) {
-        int ans = 0;
-        int idx = 0;
-        if (t[idx].cnt == 0)
-            return -1;
+    int min_xor(int a) {
+        int ans = 0,idx = 0;
+        if (t[idx].cnt == 0) return -1;
         for (int i = M; i >= 0; i--) {
-            if (!(num & (1ll << i))) {
-                if (t[idx].left &&( t[t[idx].left].cnt > 0)) {
-                    idx = t[idx].left;
+            if (!(a & (1ll << i))) {
+                if (t[idx].l &&( t[t[idx].l].cnt > 0)) {
+                    idx = t[idx].l;
                 } else {
                     ans |= (1ll << i);
-                    idx = t[idx].right;
+                    idx = t[idx].r;
                 }
             } else {
-                if (t[idx].right && (t[t[idx].right].cnt > 0)) {
-                    idx = t[idx].right;
+                if (t[idx].r && (t[t[idx].r].cnt > 0)) {
+                    idx = t[idx].r;
                 } else {
                     ans |= (1ll << i);
-                    idx = t[idx].left;
+                    idx = t[idx].l;
                 }
             }
         }

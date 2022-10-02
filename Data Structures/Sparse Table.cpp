@@ -2,28 +2,20 @@ const int N=200000,M = 21;
 int tab[N+1][M+1],L[N+1],a[N];
 struct st{
     int n;
-    st(int _n):n(_n){
-        for(int i=2;i<=n;i++) L[i]=L[i/2]+1;
-    }
-    int f(int x,int y){
-        return max(x,y);
-    }
+    st(int _n):n(_n){FOR(i,2,n+1) L[i]=L[i/2]+1;}
+    int f(int x,int y){ return max(x,y);}
     void build(){
-        for(int i=0;i<n;i++) tab[i][0]=a[i];
-        for(int j=1;j<=M;j++){
-            for(int i=0;i<n;i++){
-                if(i+(1<<j)-1<n){
-                    tab[i][j]=f(tab[i][j-1],tab[i+(1<<(j-1))][j-1]);}}}
-    }
+        FOR(i,0,n) tab[i][0]=a[i];
+        FOR(j,1,M+1) FOR(i,0,n)               
+        if(i+(1<<j)-1<n){
+        tab[i][j]=f(tab[i][j-1],tab[i+(1<<(j-1))][j-1]);}}}
     // for non-idempotent function
     int qry(int l,int r){
         int len=r-l+1,idx=l,tot=0;
         for(int j=M;j>=0;j--){
             if(len&(1ll<<j)){
                 tot=f(tot,tab[idx][j]);
-                idx+=(1<<j);
-            }
-        }
+                idx+=(1<<j);}}
         return tot;
     }
     // for idempotent function
