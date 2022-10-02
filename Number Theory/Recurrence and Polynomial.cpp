@@ -27,3 +27,5 @@ poly inverse(int n) const {  // 1 / p(x) % x^n, O(nlogn)
     for(int i = 1; i < n; i *= 2) {
         ans = (ans * mint(2) - ans * ans * mod_xk(2 * i)).mod_xk(2 * i);
     }return ans.mod_xk(n);}
+
+Z,Zinv(n+m-1),f=a[i]*Zinv[i],rev(Z),C=f*Z,res[k]=c[n+m-1-k]*zinv[k]
