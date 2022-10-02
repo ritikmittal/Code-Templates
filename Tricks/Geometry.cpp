@@ -1,37 +1,31 @@
 typedef int T;
 struct pt {
 T x, y;
-pt operator+(pt p) {return{x+p.x,y+p.y};};
-pt &operator+=(const pt &t){x+=t.x;y+=t.y;return *this;}
-pt operator-(pt p){return {x-p.x, y-p.y}; }
-pt &operator-=(const pt &t) {x-=t.x;y-=t.y;return *this;}
-pt operator*(T d) { return {x * d, y * d}; }
-pt &operator*=(T t) {x *= t;y *= t;return *this;}
-pt operator/(T d) { return {x / d, y / d};}
-pt &operator/=(T t) {x /= t;y /= t;return *this;}
-pt &operator=(pt b) {x = b.x;y = b.y;return *this;}
-bool operator<(const pt &a) const {
-    if (a.x == x) return y < a.y;
-    else return x < a.x;
-}
-bool operator>(const pt &a) const {
-    if (a.x == x) return y > a.y;
-    else return x > a.x;
-}
-};
+pt O+(pt p) {ret{x+p.x,y+p.y};};
+pt &O+=(const pt &t){x+=t.x;y+=t.y;ret *this;}
+pt O-(pt p){ret {x-p.x, y-p.y}; }
+pt &O-=(const pt &t){x-=t.x;y-=t.y;ret *this;}
+pt O*(T d) { ret {x * d, y * d}; }
+pt &O*=(T t) {x *= t;y *= t;ret *this;}
+pt O/(T d) { ret {x / d, y / d};}
+pt &O/=(T t) {x /= t;y /= t;ret *this;}
+pt &O=(pt b) {x = b.x;y = b.y;ret *this;}
+bool O<(const pt &a) const {
+    if (a.x == x) ret y < a.y;
+    else ret x < a.x;}
+bool O>(const pt &a) const {
+    if (a.x == x) ret y > a.y;
+    else ret x > a.x;}};
 T sq(pt p) {return p.x*p.x + p.y*p.y;}
 ld abs(pt p) {return sqrt(sq(p));}
 pt translate(pt v,pt p) {return p+v;}
 T dot(pt a, pt b) {return a.x*b.x + a.y*b.y;}
 template <typename T> int sgn(T x) {
-    return (T(0) < x) - (x < T(0));
-}
+    return (T(0) < x) - (x < T(0));}
 bool isPrep(pt a,pt b){ return dot(a,b)==0;}
 bool operator==(pt a, pt b) {return a.x == b.
             x && a.y == b.y;}
-bool operator!=(pt a, pt b) {return !(a == b)
-            ;}
-
+bool operator!=(pt a, pt b){return !(a==b);}
 ostream& operator<<(ostream& os, pt p) {
     return os<<"("<<p.x<<"," << p.y << ")";}
 pt scale(pt c,ld factor,pt p)
