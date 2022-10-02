@@ -1,28 +1,6 @@
-typedef int T;
-struct pt {
-    T x, y;
-    pt operator+(pt p) { return {x + p.x, y + p.y}; };
-    pt &operator+=(const pt &t) {x += t.x;y += t.y; return *this;}
-    pt operator-(pt p) { return {x - p.x, y - p.y}; }
-    pt &operator-=(const pt &t) {x -= t.x;y -= t.y;return *this;}
-    pt operator*(T d) { return {x * d, y * d}; }
-    pt &operator*=(T t) {x *= t;y *= t;return *this;}
-    pt operator/(T d) { return {x / d, y / d}; }
-    pt &operator/=(T t) {x /= t;y /= t;return *this;}
-    pt &operator=(pt b) {x = b.x;y = b.y;return *this;}
-    bool operator<(const pt &a) const {
-        if (a.x == x) return y < a.y;
-        else return x < a.x;
-    }
-    bool operator>(const pt &a) const {
-        if (a.x == x) return y > a.y;
-        else return x > a.x;
-    }
-};
 ostream& operator<<(ostream& os, pt p) {
     return os << "("<< p.x << "," << p.y << ")";
 }
-pt translate(pt v,pt p) {return p+v;}
 pt scale(pt c,ld factor,pt p) {return c + (p - c) * factor;}
 int latticePoints(pt a,pt b) {
     return gcd((int)(abs(a.x - b.x)), (int)(abs(a.y - b.y))) - 1;
