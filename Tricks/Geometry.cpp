@@ -272,20 +272,16 @@ void reorder(vector<pt>&a){
 }
 //inputs points are sorted in counterclockwise order
 vector<pt> minkowskiSum(vector<pt>a,vector<pt>b) {
-    reorder(a);
-    reorder(b);
+    reorder(a); reorder(b);
     vector<pt> ans;
     int i = 0, j = 0;
-    int n = sz(a), m = sz(b);
-    int times = n + m;
+    int n = sz(a), m = sz(b), times=n+m;
     while (times--) {
         ans.push_back(a[i] + b[j]);
         if (cross(a[(i + 1) % n] - a[i], b[(j + 1) % m] - b[j]) >= 0) {
-            i++;
-            i %= n;
+            i++; i %= n;
         } else {
-            j++;
-            j %= m;
+            j++; j %= m;
         }
     }
     // remove redundant points
@@ -371,22 +367,18 @@ int minEuclidDistance(vector<pt>&v) {
 int diameter(vector<pt>a) {
     a = convexHullGC(a);
     int n = a.size();
-    int ptr_a = 0;
-    int ptr_b = 1;
+    int ptr_a = 0,ptr_b = 1;
     while (cross(a[(ptr_a + 1) % n] - a[ptr_a], a[(ptr_b + 1) % n] - a[ptr_b]) > 0) {
         ptr_b++;
         ptr_b %= n;
     }
     int ans = dot(a[ptr_b] - a[ptr_a], a[ptr_b] - a[ptr_a]);
-    int begin_a = ptr_a;
-    int begin_b = ptr_b;
+    int begin_a = ptr_a,begin_b = ptr_b;
     do {
         if (cross(a[(ptr_a + 1) % n] - a[ptr_a], a[(ptr_b + 1) % n] - a[ptr_b]) > 0) {
-            ptr_b++;
-            ptr_b %= n;
+            ptr_b++, ptr_b %= n;
         } else {
-            ptr_a++;
-            ptr_a %= n;
+            ptr_a++,ptr_a %= n;
         }
         ans = max(ans, dot(a[ptr_b] - a[ptr_a], a[ptr_b] - a[ptr_a]));
     } while (begin_a != ptr_a || begin_b != ptr_b);
