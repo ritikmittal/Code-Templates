@@ -11,13 +11,13 @@ vector<int> prefF(string &s) {
 }
 // count the frequency of all prefixes
 vector<int> freq(string &s) {
-    int n = sz(s);
-    vector<int> f = prefF(s);
-    vector<int> cnt(n + 1, 0);
-    for (int i = 0; i < n; i++) cnt[f[i]]++;
-    for (int i = n - 1; i > 0; i--) cnt[f[i - 1]] += cnt[i];
-    for (int i = 0; i <= n; i++) cnt[i] += 1;
-    return cnt;
+int n = sz(s);
+vector<int> f = prefF(s);
+vector<int> cnt(n + 1, 0);
+for(int i = 0; i < n; i++) cnt[f[i]]++;
+for(int i = n-1;i>0;i--)cnt[f[i-1]]+=cnt[i];
+for(int i = 0; i <= n; i++) cnt[i] += 1;
+return cnt;
 }
 // automata over prefix function
 // aut[i][j] gives prefix function value
