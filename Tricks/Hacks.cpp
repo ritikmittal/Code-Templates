@@ -1,3 +1,7 @@
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+//ll val=rng();vll v;shuffle(all(v),rng);
+ll rand(ll x,ll y){return uniform_int_distribution<ll>(x,y)(rng);}
+
 //* Find the smallest i in [a,b] that maximizes f(i), assuming that f(a) < f(i) <= f(b)$.
 //* To reverse which of the sides allows non-strict inequalities, change the < marked with (A) to <=, and reverse the loop at (B).
 //* To minimize f, change it to >, also at (B).
@@ -35,9 +39,6 @@ size_t operator()(vector<ll> x) const {
     for(int i=0;i<sz(x);i++){
         v^=(splitmix64(x[i]+FIXED_RANDOM)>>(i%4));}
     return v;}};
-mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
-//ll val=rng();vll v;shuffle(all(v),rng);
-ll rand(ll x,ll y){return uniform_int_distribution<ll>(x,y)(rng);}
 
 std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 start = std::chrono::high_resolution_clock::now();
@@ -45,8 +46,10 @@ start = std::chrono::high_resolution_clock::now();
 end = std::chrono::high_resolution_clock::now();
 size_t elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
 cout << "\nElapsed Time: " << elapsed_time << "ms\n";
-
 // x= bit whose subsets we want
 ll x=bit;ll ss=0;
 do{}while(ss=(ss-x)&x);
+//nth fib
+if(n%2==0) return F[n]=(f(k)*f(k)+f(k-1)*f(k-1))%mod;
+else return F[n]=(f(k)*f(k+1)+f(k-1)*f(k))%mod;
 
