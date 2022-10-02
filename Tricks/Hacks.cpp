@@ -6,7 +6,6 @@ ll rand(ll x,ll y){return uniform_int_distribution<ll>(x,y)(rng);}
 //* To reverse which of the sides allows non-strict inequalities, change the < marked with (A) to <=, and reverse the loop at (B).
 //* To minimize f, change it to >, also at (B).
 ll ternSearch(ll a, ll b) {
-assert(a <= b);
 while (b - a >= 5) {
     ll mid = (a + b) / 2;
     if (f(mid) < f(mid+1)) a = mid; // (A)
@@ -14,9 +13,7 @@ while (b - a >= 5) {
 for(ll i=a+1;i<(b+1),i++) if (f(a) < f(i)) a = i; // (B)
 return a;
 }
-
-// checks if a*b will overflow
-bool is(ll a,ll b){
+bool overflow(ll a,ll b){
 if(a==0 || b==0) return false;
 if((a>LLONG_MAX/b) or ( b>LLONG_MAX/a)) return true;
 return false;
@@ -39,7 +36,6 @@ size_t operator()(vector<ll> x) const {
     for(int i=0;i<sz(x);i++){
         v^=(splitmix64(x[i]+FIXED_RANDOM)>>(i%4));}
     return v;}};
-
 std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 start = std::chrono::high_resolution_clock::now();
 //code here
