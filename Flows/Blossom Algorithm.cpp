@@ -15,15 +15,12 @@ struct Blossom {
     g[u].push_back(v); g[v].push_back(u); }
   void augment(int u, int v) {
     int pv = v, nv;
-    do {
-      pv = par[v]; nv = match[pv];
+    do { pv = par[v]; nv = match[pv];
       match[v] = pv; match[pv] = v; v = nv;
-    } while (u != pv);
-  }
+    } while (u != pv); }
   int lca(int v, int w) {
     ++t;
-    while (true) {
-      if (v) {
+    while (true) { if (v) {
         if (aux[v] == t) return v; aux[v] = t; v = orig[par[match[v]]];
       } swap(v, w); } }
   void blossom(int v, int w, int a) {
