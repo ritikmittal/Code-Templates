@@ -11,5 +11,4 @@ for (ll d = 0, maxd = 0; d <= maxd; ++d) {
             qs[(d + cost) % lim].push_back(vec);
             maxd = max(maxd, d + cost);
         }}}
-return dist;
-}
+return dist;}

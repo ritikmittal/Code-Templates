@@ -17,7 +17,5 @@ void dfs(int node,int par) {
             if (low[c] > dis[node]) {bridge.push_back({node, c});}
         } else if (c != par) {
             low[node] = min(low[node], dis[c]);
-        }
-    }
-    if (par == -1 && child > 1)art_p.insert(1);
-}
+        }}
+    if (par == -1 && child > 1)art_p.insert(1);}

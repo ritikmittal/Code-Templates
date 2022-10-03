@@ -15,10 +15,8 @@ vector<int> negative_cycle_in_graph() {
                 par[c.v] = c.u;
                 any = true;
                 x = c.v;
-            }
-        }
-        if (!any) break;
-    }
+            }}
+        if (!any) break;}
     if (x == -1)
         return {};
     for (int i = 0; i < n; i++) x = par[x];

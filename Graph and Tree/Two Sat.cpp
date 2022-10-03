@@ -37,8 +37,7 @@ void Rdfs(int node, int num) {
     vis[node] = true;
     compNo[node] = num;
     for (auto &c: rg[node]) 
-        if (!vis[c]) Rdfs(c, num);
-}
+        if (!vis[c]) Rdfs(c, num);}
 bool check() {
     fill(all(vis), false);
     for (int i = 0; i < 2 * n; i++)
