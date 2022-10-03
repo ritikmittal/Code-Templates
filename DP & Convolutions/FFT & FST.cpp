@@ -28,6 +28,30 @@ for(ll i=0;i<n;i++) out[i] = in[-i & (n - 1)] - conj(in[i]);
 fft(out);
 for(ll i=0;i<sz(res);i++) res[i] = imag(out[i]) / (4 * n);
 return res;}//FST from here
+
+typedef vector<ll> vl;
+template<int M> vl convMod(const vl &a, const vl &b) {
+	if (a.empty() || b.empty()) return {};
+	vl res(sz(a) + sz(b) - 1);
+	int B=32-__builtin_clz(sz(res)), n=1<<B, cut=int(sqrt(M));
+	vector<C> L(n), R(n), outs(n), outl(n);
+	rep(i,0,sz(a)) L[i] = C((int)a[i] / cut, (int)a[i] % cut);
+	rep(i,0,sz(b)) R[i] = C((int)b[i] / cut, (int)b[i] % cut);
+	fft(L), fft(R);
+	rep(i,0,n) {
+		int j = -i & (n - 1);
+		outl[j] = (L[i] + conj(L[j])) * R[i] / (2.0 * n);
+		outs[j] = (L[i] - conj(L[j])) * R[i] / (2.0 * n) / 1i;
+	}
+	fft(outl), fft(outs);
+	rep(i,0,sz(res)) {
+		ll av = ll(real(outl[i])+.5), cv = ll(imag(outs[i])+.5);
+		ll bv = ll(imag(outl[i])+.5) + ll(real(outs[i])+.5);
+		res[i] = ((av % M * cut + bv) % M * cut + cv) % M;
+	}
+	return res;
+}
+
 void FST(vll& a, bool inv) {
     for (ll n = sz(a), step = 1; step < n; step *= 2) {
         for (ll i = 0; i < n; i += 2 * step) for(ll j=i;j<i+step;j++) {

@@ -48,4 +48,15 @@ do{}while(ss=(ss-x)&x);
 //nth fib
 if(n%2==0) return F[n]=(f(k)*f(k)+f(k-1)*f(k-1))%mod;
 else return F[n]=(f(k)*f(k+1)+f(k-1)*f(k))%mod;
-
+//Only 2 root(n) n/d values
+for (ll i = 1, la; i <= n; i = la + 1) {
+        la = n / (n / i);
+        dbg(i,la,n/i,n/la);
+    }
+//FIB
+1. F_{n-1}F_{n+1} - F_{n}^2 = (-1)^n
+2. F_{n+k} = F_{k}F_{n+1} + F_{k-1}F_{n}
+3.  Fn | Fm <=> n | m
+4. GCD(F_m,F_n) = F_{gcd(m,n)}
+5. F_{2k} = F_{k}(2F_{k+1}-F_{k}). F_{2k+1} = F^2_{k+1} +F^2_{k}
+6. n>=phi(m) => x^n = x^(phi(m)+n%phi(m)) mod m 
