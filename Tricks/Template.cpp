@@ -2,7 +2,6 @@
 #define setbits(x)     __builtin_popcountll(x)
 #define zrobits(x)     __builtin_ctzll(x) 
 #define mod2           998244353
-#define inf            1e18
 #define sz(x)          (int)(x).size()
 #define deci(x, y)     fixed<<setprecision(y)<<x
 #define fastIO         ios_base::sync_with_stdio(false); cin.tie(nullptr)
@@ -26,8 +25,6 @@ int power(int x, int y, int p) {
     while (y > 0) {
         if (y & 1) res = (res * x) % p;
         y = y >> 1; x = (x * x) % p;
-    }
-    return res;
-}
-ll cdiv(ll a, ll b) { return a/b+((a^b)>0&&a%b); } // divide a by b rounded up
-ll fdiv(ll a, ll b) { return a/b-((a^b)<0&&a%b); } // divide a by b rounded down
+    }return res;}
+ll cdiv(ll a,ll b){return a/b+((a^b)>0&&a%b);}
+ll fdiv(ll a,ll b){return a/b-((a^b)<0&&a%b);}

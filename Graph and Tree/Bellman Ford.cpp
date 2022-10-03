@@ -1,8 +1,6 @@
 struct edge{
-    int u,v,cost;
-};
-const int N=2501;
-int d[N],par[N],n;
+    int u,v,cost;};
+const int N=2501;int d[N],par[N],n;
 vector<edge>e;
 void bellman_ford(int source) {
 for (int i = 0; i < n; i++) {d[i] = inf;par[i] = -1;}

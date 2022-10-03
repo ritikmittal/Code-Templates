@@ -43,12 +43,10 @@ void decompose(int vert, int cent_par = 0) {
     c_par[child] = cent_par;
     level[child] = level[cent_par] + 1;
     dfs(child,-1,level[child],a[child]); // function calculator
-
     for (auto e:eg[child]) {
         int c=adj(e,child);
         if(del[e]) continue;
-        del[e]=true;
-        decompose(c, child);
+        del[e]=true;decompose(c, child);
 }}
 int lca(int x,int y){
     if(level[x]>level[y]) swap(x,y);
